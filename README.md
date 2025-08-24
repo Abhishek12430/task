@@ -1,12 +1,64 @@
-# React + Vite
+📌 Employee App (Full Stack Project)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a Full Stack Employee Management App built with React (frontend) and Node.js + Express + MySQL (backend).
+The project has three pages:
 
-Currently, two official plugins are available:
+Select Employee Page – Choose an employee name from options.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Employee Form Page – Fill employee details like role, salary, and mobile number. The name is auto-filled from page one.
 
-## Expanding the ESLint configuration
+Employee Details Page – Displays only the employees with complete details, along with Edit and Delete options.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+##🚀 Features
+
+MySQL Database with two tables:
+
+employees (id, name)
+
+employee_details (id, employee_id, role, salary, mobile,branchs)
+
+##Frontend in React with:
+
+SelectEmployee.jsx → Select employee
+
+EmployeeForm.jsx → Fill details
+
+EmployeeDetails.jsx → View, Edit, Delete
+
+Backend in Node.js with Express:
+
+REST APIs for employee CRUD
+
+MySQL database connection using mysql2 with promises
+
+Navigation between pages with React Router
+
+
+
+
+## database
+
+create database employee_management_system;
+use employee_management_system;
+-- First table: Employee (id, name)
+CREATE TABLE employee (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL
+);
+
+-- Second table: Employee Details (role, salary, mobile, employee_id)
+CREATE TABLE employee_details (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  role VARCHAR(100),
+  salary DECIMAL(10,2),
+  mobile VARCHAR(15),
+  employee_id INT,
+  FOREIGN KEY (employee_id) REFERENCES employee(id) ON DELETE CASCADE
+);
+
+USE employee_app;
+
+INSERT INTO employee (name) VALUES ('Neha Sharma'),('Ravi Kumar'),('Priya Singh'),('Amit Verma'),('Sneha Reddy'),('Rahul Mehta'),('Kiran Patel');
+
+ALTER TABLE employee_details
+ADD COLUMN branchs VARCHAR(100);
